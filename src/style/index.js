@@ -10,5 +10,13 @@ export const AppWrapper = styled.div.attrs((props) => ({
       flex: 1;
       border: 1px solid ${(props) => props.color};
     }
+    #buttons {
+      border: none;
+      button {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+      }
+    }
   }
 `;
