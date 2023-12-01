@@ -1,24 +1,13 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import store from "../store";
-import { changeNameAction } from "../store/action";
+import { changeNameAction } from "../store/profile";
 
 export class Profile extends PureComponent {
   constructor() {
     super();
     this.state = {
-      name: store.getState().name,
-      newName: "",
-    };
-  }
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      const name = store.getState().name;
-      this.setState({ name });
-    });
-  }
-  componentWillUnmount() {
-    this.unsubscribe();
+      newName: ""
+    }
   }
   handleSubmitClick(event) {
     event.preventDefault();
@@ -28,10 +17,11 @@ export class Profile extends PureComponent {
     this.setState({ newName: event.target.value });
   }
   changeName(name) {
-    this.props.changeNameAction(name);
+    this.props.changeName(name);
   }
   render() {
-    const { name, newName } = this.state;
+    const { newName } = this.state;
+    const { name } = this.props;
     return (
       <div>
         <h1>profile: {name}</h1>
@@ -53,12 +43,13 @@ export class Profile extends PureComponent {
 }
 
 const mapState = (state) => ({
-  name: state.name,
+  name: state.profile.name,
 });
-const mapDispatch = (dispatch) => ({
-  changeNameAction(name) {
-    dispatch(changeNameAction(name));
-  },
-});
+// const mapDispatch = (dispatch) => ({
+//   changeNameAction(name) {
+//     dispatch(changeNameAction(name));
+//   },
+// });
+const mapDispatch = (dispatch) => ({changeName: (name) => dispatch(changeNameAction(name))});
 const cHome = connect(mapState, mapDispatch)(Profile);
 export default cHome;

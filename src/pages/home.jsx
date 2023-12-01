@@ -1,29 +1,13 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import store from "../store";
-import { changeCounterAction } from "../store/action";
+import { changeCounterAction } from "../store/home";
 
 export class Home extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      counter: store.getState().counter,
-    };
-  }
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      const counter = store.getState().counter;
-      this.setState({ counter });
-    });
-  }
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
   btnClick(num) {
-    this.props.changeCounterAction(num);
+    this.props.changeCounter(num);
   }
   render() {
-    const { counter } = this.state;
+    const { counter } = this.props;
     return (
       <div>
         <h1>Home</h1>
@@ -40,13 +24,14 @@ export class Home extends PureComponent {
     );
   }
 }
-  const mapState = (state) => ({
-    counter: state.counter,
-  });
-  const mapDispatch = (dispatch) => ({
-    changeCounterAction(num) {
-      dispatch(changeCounterAction(num));
-    },
-  });
-  const cHome = connect(mapState, mapDispatch)(Home);
-  export default cHome;
+const mapState = (state) => ({
+  counter: state.home.counter
+});
+// const mapDispatch = (dispatch) => ({
+//   changeCounterAction(num) {
+//     dispatch(changeCounterAction(num));
+//   },
+// });
+const mapDispatch = (dispatch) => ({changeCounter: (num) => dispatch(changeCounterAction(num))})
+const cHome = connect(mapState, mapDispatch)(Home);
+export default cHome;
