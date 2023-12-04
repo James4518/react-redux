@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import { fetchMultidataAction } from "../store/catagory/action";
+import { fetchMultidataAction } from "../store/features/catagory";
 
 export class Catagory extends PureComponent {
   componentDidMount() {
@@ -37,6 +37,8 @@ const mapState = (state) => ({
 //     dispatch(fetchMultidataAction());
 //   }
 // });
-const mapDispatch = (dispatch) => ({ fetchMultidata: () => dispatch(fetchMultidataAction())});
+const mapDispatch = (dispatch) => ({
+  fetchMultidata: () => dispatch(fetchMultidataAction()),
+});
 const cCatagory = connect(mapState, mapDispatch)(Catagory);
 export default cCatagory;

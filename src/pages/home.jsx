@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import { changeCounterAction } from "../store/home";
+import { changeCounterAction } from "../store/features/home";
 
 export class Home extends PureComponent {
   btnClick(num) {
@@ -25,13 +25,15 @@ export class Home extends PureComponent {
   }
 }
 const mapState = (state) => ({
-  counter: state.home.counter
+  counter: state.home.counter,
 });
 // const mapDispatch = (dispatch) => ({
 //   changeCounterAction(num) {
 //     dispatch(changeCounterAction(num));
 //   },
 // });
-const mapDispatch = (dispatch) => ({changeCounter: (num) => dispatch(changeCounterAction(num))})
+const mapDispatch = (dispatch) => ({
+  changeCounter: (num) => dispatch(changeCounterAction(num)),
+});
 const cHome = connect(mapState, mapDispatch)(Home);
 export default cHome;

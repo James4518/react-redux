@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import { changeNameAction } from "../store/profile";
+import { changeNameAction } from "../store/features/profile";
 
 export class Profile extends PureComponent {
   constructor() {

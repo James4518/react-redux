@@ -1,18 +1,16 @@
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
-import thunk from "redux-thunk";
-import homeReducer from "./home";
-import profileReducer from "./profile";
-import catagoryReducer from "./catagory";
+import { configureStore } from "@reduxjs/toolkit";
 
-const reducer = combineReducers({
-  home: homeReducer,
-  profile: profileReducer,
-  catagory: catagoryReducer,
+import homeReducer from "./features/home";
+import profileReducer from "./features/profile";
+import catagoryReducer from "./features/catagory";
+
+const store = configureStore({
+  reducer: {
+    home: homeReducer,
+    profile: profileReducer,
+    catagory: catagoryReducer,
+  },
 });
 
-// redux-devtools
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 export default store;
 
